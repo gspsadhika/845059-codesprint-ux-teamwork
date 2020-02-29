@@ -1,0 +1,195 @@
+<main>
+    <form [formGroup]="placeOrderForm" (submit)="submit()">
+        <div class=" container-fluid">
+            <h2 class="display-4 mt-5 mb-5 text-purple">Place your order</h2>
+            <div class="form-row mb-0">
+                <!-- Amount -->
+                <label class="form-label">Gift Card Amount: </label>
+                <div class="form-group col">
+                    <!-- INR -->
+                    <input type="number" class="form-control mb-1" id="amountINR" placeholder="Rupees" name="amountINR"
+                        formControlName="amountINR" autofocus>
+                    <label for="amountINR">INR</label>
+                </div>:
+                <div class="form-group col">
+                    <!-- Paise  -->
+                    <input type="number" class="form-control" min="0" max="99" id="amountPaise" placeholder="Paise"
+                        name="amountPaise" formControlName="amountPaise">
+                    <label for="amountPaise">Paise
+                        <small class="text-danger" id="limitError" *ngIf="placeOrderForm.controls.amountPaise.errors">
+                            Gift card amount paise field needs to be in the limits of 0 to 100
+                        </small>
+                    </label>
+                </div>
+            </div>
+            <!-- Amount Error   -->
+
+            <div class="form-row">
+                <!-- Recipent Name  -->
+                <label class="form-label">Recipient Name: </label>
+                <div class="form-group col">
+                    <!-- First Name  -->
+                    <input type="text" class="form-control" id="rFirstName" formControlName="rFirstName"
+                        placeholder="First Name" name="rFirstName">
+                    <label for="rFirstName">First Name
+                        <small class="text-danger"
+                            *ngIf="placeOrderForm.controls.rFirstName.errors && placeOrderForm.controls.rFirstName.touched"
+                            id="rFirstNameError">
+                            Name cannot have numericals or cannot be empty
+                        </small>
+                    </label>
+                    <!-- First Name Error  -->
+
+                </div>
+                <div class="form-group col">
+                    <!-- last name  -->
+                    <input type="text" class="form-control" id="rLastName" placeholder="Last Name" name="rLastName"
+                        formControlName="rLastName">
+                    <label for="rLastName">Last Name
+                        <small class="text-danger"
+                            *ngIf="placeOrderForm.controls.rLastName.errors && placeOrderForm.controls.rLastName.touched"
+                            id="rFirstNameError">
+                            Name cannot have numericals or cannot be empty
+                        </small>
+                    </label>
+                </div>
+            </div>
+            ​
+            <div class="form-group">
+                <div>
+                    <fieldset class="field-form">
+                        <legend class="pl-5">
+                            Shipping Address
+                        </legend>
+                        <!-- address  -->
+                        <input type="text" class="form-control" id="streetAddress" placeholder="Enter your address"
+                            name="addr" formControlName="address">
+                        <label for="streetAddress" class="form-control-label">Street Address</label>
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Enter City" id="city"
+                                    formControlName="city">
+                                <label for="city">City</label>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Enter State" id="state"
+                                    formControlName="state">
+                                <label for="state">State</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <select class="custom-select" id="country" formControlName="country">
+                                    <option selected disabled value="">Country</option>
+                                    <option value="India">India</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="New Zealand">New Zealand</option>
+                                </select>
+                                <label for="country">Country</label>
+                            </div>
+                            <div class="col">
+                                <input type="number" minlength="6" maxlength="6" class="form-control"
+                                    formControlName="pincode" placeholder="Enter Pincode" id="pincode">
+                                <label for="pincode">Pincode
+                                    <small class="text-danger"
+                                        *ngIf="placeOrderForm.controls.pincode.errors && placeOrderForm.controls.pincode.touched">
+                                        Pin code should be of 6 digits
+                                    </small>
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="form-row">
+                <!-- buyers name  -->
+                <label for="name" class="form-label mr-2"> Buyer's Name: </label>
+                <div class="form-group col">
+                    <!-- fist name  -->
+                    <input type="text" class="form-control" placeholder="First Name" required id="bFirstName"
+                        formControlName="bFirstName">
+                    <label for="bFirstName">First Name
+                        <small class="text-danger"
+                            *ngIf="placeOrderForm.controls.bFirstName.errors && placeOrderForm.controls.bFirstName.touched">
+                            Name cannot have numericals or cannot be empty
+                        </small>
+                    </label>
+                </div>
+                <div class="form-group col">
+                    <!-- last name  -->
+                    <input type="text" class="form-control" placeholder="Last Name" id="bLastName"
+                        formControlName="bLastName">
+                    <label for="">Last Name
+                        <small class="text-danger"
+                            *ngIf="placeOrderForm.controls.bLastName.errors && placeOrderForm.controls.bLastName.touched">
+                            Name cannot have numericals or cannot be empty
+                        </small>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber" class="form-label" class="mr-2">Phone Number:</label>
+                <div class="input-group-prepend" formGroupName="phoneNumber">
+                    <input type="text" class="form-control limit-size d-none d-md-block noborder" formControlName="code" size="2" value="+91"
+                        readonly="readonly" id="phoneNumCode" />
+                    <input type="number" class="form-control" formControlName="digit1" id="phoneNumDigit1" appOnlyOneDigit appGotoNextField
+                        min="1" max="9" />
+                    <input type="number" class="form-control" formControlName="digit2" id="phoneNumDigit2" appOnlyOneDigit appGotoNextField
+                        min="0" max="9" />
+                    <input type="number" class="form-control" formControlName="digit3" id="phoneNumDigit3" appOnlyOneDigit appGotoNextField
+                        min="0" max="9" />
+                    <input type="number" class="form-control" formControlName="digit4" id="phoneNumDigit4" appOnlyOneDigit appGotoNextField
+                        min="0" max="9" />
+                    <input type="number" class="form-control" formControlName="digit5" id="phoneNumDigit5" appOnlyOneDigit appGotoNextField
+                        min="0" max="9" />
+                    <input type="number" class="form-control" formControlName="digit6" id="phoneNumDigit6" appOnlyOneDigit appGotoNextField
+                        min="0" max="9" />
+                    <input type="number" class="form-control" formControlName="digit7" id="phoneNumDigit7" appOnlyOneDigit appGotoNextField
+                        min="0" max="9" />
+                    <input type="number" class="form-control" formControlName="digit8" id="phoneNumDigit8" appOnlyOneDigit appGotoNextField
+                        min="0" max="9" />
+                    <input type="number" class="form-control" formControlName="digit9" id="phoneNumDigit9" appOnlyOneDigit appGotoNextField
+                        min="0" max="9" />
+                    <input type="number" class="form-control" formControlName="digit10" id="phoneNumDigit10" appOnlyOneDigit min="0" max="9" />
+                </div>
+                <small class="text-danger"
+                    *ngIf="placeOrderForm.controls.phoneNumber.errors && placeOrderForm.controls.phoneNumber.touched">
+                    Single field can hold only one digit
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" placeholder="Email" name="email" id="email"
+                    formControlName="email">
+                <small class="text-danger"
+                    *ngIf="placeOrderForm.controls.email.errors && placeOrderForm.controls.email.touched">
+                    Enter a proper email address
+                </small>
+            </div>
+            <button type="submit" id="placeOrderBtn" [disabled]="!placeOrderForm.valid || disableForm" class="btn btn-danger btn-block mb-3">Place
+                Order</button>
+        </div>
+    </form>
+</main>
+<div class="modal fade" id="orderPlaceSuccess" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Your order is placed successfully. Thankyou for shopping with us.
+          <div class="row">
+              <img class="mx-auto" src="../../assets/thank_you_160.jpg" alt="Thank You">
+          </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="changePage()">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>

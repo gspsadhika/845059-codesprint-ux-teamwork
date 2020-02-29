@@ -1,0 +1,27 @@
+<main>
+    <h2 class="display-4 my-5 text-purple">View Orders</h2>
+    <div class="table-responsive"  *ngIf="orders.length > 0">
+        <table class="table">
+            <tr>
+                <th>S.No</th>
+                <th>Buyers Name</th>
+                <th>Shipping Address</th>
+                <th>City</th>
+                <th>Amount</th>
+                <th>Phone</th>
+            </tr>
+            <tr *ngFor="let order of orders">
+                <td>{{order.id}}</td>
+                <td>{{order.bFirstName +" "+ order.bLastName | titlecase}}</td>
+                <td>{{order.address +", "+ order.city +", "+ order.state +", "+ order.country}}</td>
+                <td>{{order.city}}</td>
+                <td>{{order.amountINR +"."+ order.amountPaise | currency:"INR"}}</td>
+                <td>{{order.phoneNumber.code+" "+order.phoneNumber.digit1+order.phoneNumber.digit2+order.phoneNumber.digit3+order.phoneNumber.digit4+order.phoneNumber.digit5+order.phoneNumber.digit6+order.phoneNumber.digit7+order.phoneNumber.digit8+order.phoneNumber.digit9+order.phoneNumber.digit10}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="orders.length === 0">
+        <p class="text-purple">No orders to display</p>
+    </div>
+</main>
